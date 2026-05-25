@@ -25,12 +25,13 @@ export const register=async(req, res)=>{
 
           const token=jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn:"7d"});
 
-          res.cookie("token", token, {
-            httpOnly:true,
-            secure:process.env.NODE_ENV==="production",
-            sameSite:process.env.NODE_ENV==="production"? "none": "strict",
-            maxAge:7 * 24 * 60 *60 * 1000
-          });
+          //1st
+        //   res.cookie("token", token, {
+        //     httpOnly:true,
+        //     secure:process.env.NODE_ENV==="production",
+        //     sameSite:process.env.NODE_ENV==="production"? "none": "strict",
+        //     maxAge:7 * 24 * 60 *60 * 1000
+        //   });
 
      //Sending welcome email
           const mailOptions={
@@ -43,7 +44,12 @@ export const register=async(req, res)=>{
           await transporter.sendMail(mailOptions);
 
 
-          return res.json({success:true});
+        //   return res.json({success:true});
+        return res.json({ 
+        success: true, 
+        message: "Logged in successfully", 
+        token: token // 🚀 Send the token directly in the response body
+        });
 
         
     } catch (error) {
@@ -74,14 +80,20 @@ export const login =async (req, res)=>{
 
          const token=jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn:"7d"});
 
-          res.cookie("token", token, {
-            httpOnly:true,
-            secure:process.env.NODE_ENV==="production",
-            sameSite:process.env.NODE_ENV==="production"? "none": "strict",
-            maxAge:7 * 24 * 60 *60 * 1000
-          })
+         //1st
+        //   res.cookie("token", token, {
+        //     httpOnly:true,
+        //     secure:process.env.NODE_ENV==="production",
+        //     sameSite:process.env.NODE_ENV==="production"? "none": "strict",
+        //     maxAge:7 * 24 * 60 *60 * 1000
+        //   })
 
-          return res.json({success:true});
+        //2nd
+          return res.json({ 
+          success: true, 
+          message: "Logged in successfully", 
+          token: token // 🚀 Send the token directly in the response body
+          });
 
         
 
