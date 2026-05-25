@@ -26,7 +26,11 @@ const Login = () => {
          if(data.success){
           localStorage.setItem('token', data.token);
           setIsLoggedin(true)
+<<<<<<< HEAD
           toast.success("Registered successfully")
+=======
+          toast.success("Registered successfully")   
+>>>>>>> 2e063ef62cb2b88961470304a86289962071fbf8
           await getUserData()
           navigate('/')
          }else{
@@ -36,7 +40,10 @@ const Login = () => {
         const {data}=await axios.post(backendUrl + "/api/auth/login", {email, password})
          if(data.success){
           setIsLoggedin(true)
+<<<<<<< HEAD
           localStorage.setItem('token', data.token);
+=======
+>>>>>>> 2e063ef62cb2b88961470304a86289962071fbf8
           toast.success("Logged in successfully")
           await getUserData()
           navigate('/')
