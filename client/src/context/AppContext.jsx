@@ -17,9 +17,14 @@ export const AppContextProvider=(props)=>{
 
     const getAuthState=async ()=>{
         try {
-            
+            const token = localStorage.getItem('token');
+            if (!token) return;
 
-            const {data}=await axios.get(backendUrl + '/api/auth/is-auth')
+            const {data}=await axios.get(backendUrl + '/api/auth/is-auth', {
+            headers: {
+                Authorization: `Bearer ${token}` // 🚀 Send token in header
+            }
+        })
             if(data.success){
                 setIsLoggedin(true)
                 await getUserData()
@@ -27,7 +32,7 @@ export const AppContextProvider=(props)=>{
 
 
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.response?.data?.message || error.message);
         }
     }
 
