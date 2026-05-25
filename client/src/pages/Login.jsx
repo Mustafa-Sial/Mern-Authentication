@@ -25,7 +25,8 @@ const Login = () => {
          const {data}=await axios.post(backendUrl + "/api/auth/register", {name, email, password})
          if(data.success){
           setIsLoggedin(true)
-           getUserData()
+          toast.success("Registered successfully")   
+          await getUserData()
           navigate('/')
          }else{
           toast.error(data.message)
@@ -34,7 +35,8 @@ const Login = () => {
         const {data}=await axios.post(backendUrl + "/api/auth/login", {email, password})
          if(data.success){
           setIsLoggedin(true)
-          getUserData()
+          toast.success("Logged in successfully")
+          await getUserData()
           navigate('/')
          }else{
           toast.error(data.message)
