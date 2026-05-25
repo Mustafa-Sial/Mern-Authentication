@@ -11,12 +11,32 @@ const port = process.env.PORT || 4000
 
 connectDB();
 
-const allowedOrigins=['http://localhost:5173']
+// const allowedOrigins=['http://localhost:5173']
+
+// app.use(express.json());
+// app.use(cookieParser())
+// //so we can send cookies from express in form of response
+// app.use(cors({origin:allowedOrigins,credentials: true}))
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://mern-authentication-ten-lyart.vercel.app'
+];
 
 app.use(express.json());
-app.use(cookieParser())
-//so we can send cookies from express in form of response
-app.use(cors({origin:allowedOrigins,credentials: true}))
+app.use(cookieParser());
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 //Api endpoints
 app.get("/",(req, res)=>res.send("API working fine"))
