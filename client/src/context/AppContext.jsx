@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect } from "react"
 import { createContext, useState } from "react"
+import { toast } from "react-toastify";
 
 
 export const AppContent = createContext()
@@ -20,7 +21,7 @@ export const AppContextProvider=(props)=>{
             const {data}=await axios.get(backendUrl + '/api/auth/is-auth')
             if(data.success){
                 setIsLoggedin(true)
-                getUserData()
+                await getUserData()
             }
 
 
